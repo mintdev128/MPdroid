@@ -14,7 +14,7 @@
 
 `pkg play/add [pkgname] [local filename]`
  
- Renamed to pkg in update 2.0, added function `add` to download files from programs repo (uses FTP tool), if using add name as [pkgname] and local name as [local filename].
+ Renamed to pkg in update 2.0, added function `add` to download files from programs repo (uses FTP tool), downloads [pkgname] as [local filename].py .
 
 `constr play [programm name]`
 
