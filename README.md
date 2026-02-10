@@ -7,16 +7,17 @@
 ## Main 
   To use toolbox just write the command you want to use, so simple.
   It can perform basic functions such as : 
-* date, pwd, cd, clear and ls.
-  Just like in BSDs.
+* cd, cp, date, echo, ftp, ls, mkdir, mk, no, pkg, printf, reset, rm, rmdir, sleep, tempmod, whoami, yes.
+  some inspired by Linuxes or BSDs.
 ## PKG tool 
-In this you can use pkg to play or download programms. 
+You can use pkg to play or download programms. 
 
 `pkg play/add/list [pkgname] [local filename]`
  
- Renamed to pkg in update 2.0,
- when using function `add` downloads pkgs from programs repo (downloads [pkgname] as [local filename].py ,uses ftp tool)
- when using function `list` views https://raw.githubusercontent.com/mintdev128/FDSPKG/refs/heads/main/list.txt file contents.
+Renamed to pkg in update 2.0,
+when using function `add` downloads pkgs from programs repo (downloads [pkgname] as [local filename].py ,uses ftp tool),
+when using function `list` views https://raw.githubusercontent.com/mintdev128/FDSPKG/refs/heads/main/list.txt file contents,
+when using function `play` executes programs.
 
 `constr play [programm name]`
 
