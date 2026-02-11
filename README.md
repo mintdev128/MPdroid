@@ -16,23 +16,32 @@ You can use pkg to play or download programms.
 `pkg play/add/list [pkgname] [local filename]`
  
 Renamed to pkg in update 2.0,
+
 when using function `add` downloads pkgs from programs repo (downloads [pkgname] as [local filename].py ,uses ftp tool),
+
 when using function `list` views https://raw.githubusercontent.com/mintdev128/FDSPKG/refs/heads/main/list.txt file contents,
+
 when using function `play` executes programs.
 
 `constr play [programm name]`
 
 Available from release 1.0, 
+
 when using function `play` executes programs.
+
 ## FTP tool
 To download files to current working directory you can use FTP.
 Supports ftp, http and https.
 `ftp (get or req)/list/read [url] [local filename]`
 
 Available from release 2.0, 
+
 when using function `get` or `req` downloads files from [url] and saves as [local filename],
+
 when using function `read` views file contents from [url] (saves it to ./tmp/ as .tmp and deletes after),
+
 when using function `list` views links in html or xhtml files (shows <a> tags).
+
 ## More
 To see more commands use
 
@@ -40,9 +49,13 @@ To see more commands use
 `toolbox list/help/def [defarg]`
 
 Available from release 2.0 .
+
 when using function `list` lists builtin programs,
+
 when using function `help` shows this program usage,
+
 when using function `def` shows [defarg] program usage.
+
 
 `toolbox`
 
