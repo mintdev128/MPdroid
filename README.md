@@ -8,7 +8,8 @@
   To use toolbox just write the command you want to use, so simple.
   It can perform basic functions such as : 
 * cd, cp, date, echo, ftp, ls, mkdir, mk, no, pkg, printf, reset, rm, rmdir, sleep, tempmod, whoami, yes.
-  some inspired by Linuxes or BSDs.
+
+	some inspired by Linuxes or BSDs.
 ## PKG tool 
 You can use pkg to play or download programms. 
 
