@@ -38,6 +38,7 @@ To see more commands use
 
 `toolbox list/help/def [defarg]`
 
+Available from release 2.0 .
 when using function `list` lists builtin programs,
 when using function `help` shows this program usage,
 when using function `def` shows [defarg] program usage.
