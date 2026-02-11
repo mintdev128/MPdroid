@@ -35,5 +35,13 @@ when using function `list` views links in html or xhtml files (shows <a> tags).
 ## More
 To see more commands use
 
+
+`toolbox list/help/def [defarg]`
+
+when using function `list` lists builtin programs,
+when using function `help` shows this program usage,
+when using function `def` shows [defarg] program usage.
+
 `toolbox`
+
 Available from release 1.1 fix .
