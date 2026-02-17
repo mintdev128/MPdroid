@@ -1,7 +1,8 @@
-# FreeFlameDevShell
+# BaseFlameDevShell
+`Python sketch`
 <img width="268" height="268" alt="Chip with fire icon on it." src="https://github.com/user-attachments/assets/5c6fa0a7-fbbf-46b5-9456-97080e57b09e" />
 
-# FreeFDS
+# BaseFDS
   Small toolbox written on Python, almost ready to run on Everything.
 # Instructions
 ## Main 
