@@ -20,5 +20,5 @@
                                ##}}}########}                               
                                      #}                                     
 </small>
-# FlatShell
-  Shell with interesting ideas.
+
+Shell with interesting ideas.
