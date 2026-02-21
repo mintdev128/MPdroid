@@ -1,3 +1,3 @@
 Partial version of flatfetch 1.0:
-    fcd, flatfetch, fls, fpwd, fclear, and just the shell
+    fcd, flatfetch(in another repo), fls, fpwd, fclear.
 Parts come as basic functions under unlicense
