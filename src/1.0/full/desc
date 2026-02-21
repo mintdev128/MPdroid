@@ -1,0 +1,5 @@
+Version 1 :
+  basic functions
+  additional Flatfetch function
+    shows basic system info
+    (kernel, release, ram, cpu freq and cores, username etc.)
