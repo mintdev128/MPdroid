@@ -2,7 +2,7 @@
 //# Ready to compile programm
 //# IF YOU DON'T KNOW WHAT YOU'RE DOING: DO NOT EDIT.
 //# gcc --static [filename] to compile. 
-//# FlatShell source for LINUX.
+//# FlatShell source for UNIX.
 //#
 #include <stdbool.h>
 #include <stdio.h>
@@ -236,3 +236,4 @@ int main() {
         free(line);
     }
 }
+
