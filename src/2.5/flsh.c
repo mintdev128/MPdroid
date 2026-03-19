@@ -560,7 +560,7 @@ void Flatsh_config_mode(void){
     char *guide[] = {
         "If you want to access this shell from everywhere, you need to install this shell",
         "into $PATH, just so you know, you can access $PATH variable by using",
-        "   echo $PATH          ",
+        "   echo $PATH             ",
         "If you get output (it should look like /dir1:/dir2) you can select one of them",
         "and copy this program into one of them, i will copy into the most basic",
         "   sudo cp ./FlSh /bin",
