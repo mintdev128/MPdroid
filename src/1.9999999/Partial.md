@@ -1,3 +1,3 @@
 # note from PARTIAL
 
-Im branched into another project, bro.
+I branched into another project, bro.
