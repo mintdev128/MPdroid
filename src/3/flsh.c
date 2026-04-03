@@ -23,9 +23,11 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <vm/vm_param.h>
-#include <histedit.h>
 #ifdef __linux__
     #include <sys/sysinfo.h>
+	#include <readline/readline.h>
+#ifdef BSD
+	#include <histedit.h>
 #endif
 #ifndef PATH_MAX
 #define PATH_MAX 4096
