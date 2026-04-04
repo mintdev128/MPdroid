@@ -553,9 +553,7 @@ void Flatsh_menu_mode(void){
                 refresh();
                 break;
             default:
-                break;}}
-end:
-    endwin;}
+                break;}}}
 //# Config mode
 void Flatsh_config_mode(void){
     //# init and config
@@ -698,13 +696,11 @@ void Flatsh_config_mode(void){
                         mvprintw(g+4,5,"%s",guide[g]);}
                         getch();}
                 else if (choice == menumax-1) {
-                    goto end;}
+                    endwin();free(args);flatsh_clrs(NULL);exit(1);}
                 refresh();
                 break;
             default:
-                break;}}
-end:
-    endwin;}
+                break;}}}
 //# end of Shell modes
 //#
 //# Init
