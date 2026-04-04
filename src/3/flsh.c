@@ -23,10 +23,10 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <vm/vm_param.h>
-#ifdef __linux__
+#if defined(__linux__)
     #include <sys/sysinfo.h>
 	#include <readline/readline.h>
-#ifdef BSD
+#elif defined(BSD)
 	#include <histedit.h>
 #endif
 #ifndef PATH_MAX
