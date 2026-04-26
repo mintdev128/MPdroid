@@ -17,22 +17,22 @@
 #include <pwd.h>
 #include <errno.h>
 #include <sys/utsname.h>
-#include <sys/sysctl.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#include <vm/vm_param.h>
 #if defined(__linux__)
     #include <sys/sysinfo.h>
 	#include <readline/readline.h>
 #elif defined(BSD)
 	#include <histedit.h>
+    #include <sys/sysctl.h>
+    #include <vm/vm_param.h>
 #endif
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
-char *ver = "UXpyglass 4 + Shell 3 + Menu 1.0" ;
+char *ver = "Mint3 refresh" ;
 //#define COLOR "\033[(48 or 38);2;R;G;B"
 #define BK "\x1B[38;02;02;02;02;48;2;22;22;22m"
 #define RD "\x1B[31m"
@@ -53,8 +53,8 @@ char *ver = "UXpyglass 4 + Shell 3 + Menu 1.0" ;
 //# Functions 
 //#
 void centr(char *text, int num) {
-    int cols = 80;
-    int lines = 24;
+    int cols = 60;
+    int lines = 100;
 #ifdef TIOCGSIZE
     struct ttysize ts;
     ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
@@ -145,12 +145,37 @@ void flatsh_unixpyglass(char **args) {
     struct utsname buffer;
     uname(&buffer);
 //# cpu
-    long cores = sysconf(_SC_NPROCESSORS_ONLN); 
-    FILE *fp = fopen("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq", "r");
+    long cores = sysconf(_SC_NPROCESSORS_ONLN);
     uint64_t max_freq_mhz = 0;
+    #ifdef __FreeBSD__
     size_t size = sizeof(max_freq_mhz);
     if (sysctlbyname("hw.cpufrequency", &max_freq_mhz, &size, NULL, 0) != 0) {
         sysctlbyname("machdep.tsc_freq", &max_freq_mhz, &size, NULL, 0);}
+    #elif defined(__linux__)
+    struct sysinfo info;
+    int deb = access("/etc/debian_version", F_OK);
+    FILE *fp = NULL;
+    if (deb!=-1) {
+        const char *paths[] = {"/proc/cpuinfo"};
+    }else {
+    const char *paths[] = {
+        "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq",
+        "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq"};
+        for (int i = 0; i < 2; i++) {
+            fp = fopen(paths[i], "r");
+        if (fp) break;}}
+    if (fp != NULL) {
+    if (deb!=-1){
+            char line[256];
+            while (fgets(line, sizeof(line), fp)) {
+                if (strncmp(line, "cpu MHz", 7) == 0) {
+                    char *colon = strchr(line, ':');
+                    if (colon) {
+                        max_freq_mhz = (uint64_t)atof(colon + 1);}}}}
+    else if (fp) {fscanf(fp, "%lu", &max_freq_mhz);
+        max_freq_mhz /= 1000;fclose(fp);}}
+    else{max_freq_mhz = 0; }
+    #endif
 //# ram + swap
     long pages = sysconf(_SC_PHYS_PAGES);
     long page_size = sysconf(_SC_PAGESIZE);
@@ -162,11 +187,9 @@ void flatsh_unixpyglass(char **args) {
     sysctlbyname("vm.swap_total", &swap_total, &len, NULL, 0);
     unsigned long long sw_mb = swap_total / (1048576);
     #elif defined(__linux__)
-    struct sysinfo info;
     unsigned long long sw_mb =((unsigned long long)info.totalswap * info.mem_unit)/(1048576);
     #endif
 //# misc
-
     char *home = getenv("HOME");
     char x = 'x';
     int num = strlen(home) + 2 ;
@@ -201,7 +224,7 @@ void flatsh_help(char **args) {
     printf("%s| or OP programs, it could harm your system, or make it unstable,               |%s\n",MENU,NO);
     printf("%s| This shell was designed to provide easier usage for new Unix family os users. |%s\n",MENU,NO);
     printf("%s+----------------------------------------+--------------------------------------|%s\n",MENU,NO);
-    printf("%s|FlatSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
+    printf("%s|MintSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
     printf("%s|Text shell mode help                   :| fls          List subdirs            |%s\n",MENU,NO);
     printf("%s| fcd            Change working directory| Escape       Escape the shell        |%s\n",MENU,NO);
     printf("%s| fmd            Make subdir             | Help         Show this menu          |%s\n",MENU,NO);
@@ -297,7 +320,6 @@ char* flatsh_read_line() {
 //#
 //# Text mode
 void Flatsh_text_mode(){
-    char configl[PATH_MAX];
     const char* home_dir = getenv("HOME");
     struct passwd *pw = getpwuid(geteuid());
 //    snprintf(configl, PATH_MAX, "%s/%s", home_dir, ".hist.flat");
@@ -313,7 +335,6 @@ void Flatsh_text_mode(){
     while (true) {
         struct winsize w;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-        unsigned short width = w.ws_col;
         if (pw) {printf("%s%s # ",NO,pw->pw_name);}
         else {printf("%s%s # ",NO,home_dir);}
         char *line = flatsh_read_line();
@@ -365,7 +386,6 @@ void Flatsh_menu_mode(void){
     int c;
     int thmf = fgetc(thm) -48;
     int borf = fgetc(bor) -48;
-    char *ex[5];
     //# console width and height in chars
     while(1) {
     int cols = 80;
@@ -426,7 +446,7 @@ void Flatsh_menu_mode(void){
         if (system("command -v nano >/dev/null 2>&1")==0){mvprintw(3,15,"2 GNUNano");};
         if (system("command -v links >/dev/null 2>&1")==0){mvprintw(3,25,"3 Links  ");};
         if (system("command -v tmux >/dev/null 2>&1")==0){mvprintw(3,35,"4 Tmux   ");}
-        int dynpos;
+
         attroff(COLOR_PAIR(2));
         for(int i = 0; i < menumax; i++) {
             if(i == highlight) attron(COLOR_PAIR(2));
@@ -627,7 +647,6 @@ void Flatsh_config_mode(void){
         mvprintw(1,centrl,"Restart shell to apply changes");
         centrl = (cols/2) - 26;
         mvprintw(2,centrl,"Use up and down arrows to navigate, Enter to select:");
-        char loc[40];
         curs_set(0);
         const char *cornr = "#";
         attron(A_BOLD);
@@ -642,7 +661,6 @@ void Flatsh_config_mode(void){
         for (int x = 1; x < lines-1; x++) {mvaddstr(x,cols-1,"|");};
         centrl = (cols/2) - 7;
         mvprintw(0,centrl,"# Config menu #");
-        int dynpos;
         attroff(COLOR_PAIR(2));
         attroff(A_BOLD); 
         for(int i = 0; i < menumax; i++) {
@@ -706,7 +724,6 @@ void Flatsh_config_mode(void){
 //# Init
 //#
 int main() {
-    RESET:
     signal(SIGINT, SIG_IGN);
     mode_t ruleset = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
     char line[10];
