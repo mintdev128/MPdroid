@@ -32,7 +32,7 @@
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
-char *ver = "Mint3 refresh" ;
+char *ver = "Mint3" ;
 //#define COLOR "\033[(48 or 38);2;R;G;B"
 #define BK "\x1B[38;02;02;02;02;48;2;22;22;22m"
 #define RD "\x1B[31m"
@@ -204,7 +204,7 @@ void flatsh_unixpyglass(char **args) {
     printf("%s@@#@%sEX=%s@#@@%s+++%s#@@#@%s X Machine - %s\n",BK,FLAME,BK,FLAME,BK,NO, buffer.machine);
     printf("%s@@@@%s@@EEEXx==+%s@@@@@%s X Nodename - %s\n",BK,FLAME,BK,NO, buffer.nodename);
     printf("%sX%s@@@@%s@@@@EEX%s@@@@@@%sX%s X Version - %s\n",FLAME,BK,FLAME,BK,FLAME,NO, buffer.version);
-    printf("%s=xX&%s@@@@@@@@@@@%s&Xx=%s X FlatShell ver - %s\n",FLAME,BK,FLAME,NO,ver);
+    printf("%s=xX&%s@@@@@@@@@@@%s&Xx=%s X MintShell ver - %s\n",FLAME,BK,FLAME,NO,ver);
     printf("%s...%s-=xX&@@@&Xx=-%s...%s X Total freq * cores - %.2f MHZ * %ld CORES\n",BK,FLAME,BK,NO,max_freq_mhz / 1000000.0, cores);
     printf("                    X Total RAM + Swap - %lld + %lld MB\n", mem_mb,sw_mb);
     printf("%sX%sX%sX%sX%sX%sX%sX%sX%sX%sX%sX%sX%sX%sX      X\n",BK,DGR,GR,WH,RD,YL,GN,CY,BL,MG,FLAME,ERRcol,MENU,NO);
@@ -224,7 +224,7 @@ void flatsh_help(char **args) {
     printf("%s| or OP programs, it could harm your system, or make it unstable,               |%s\n",MENU,NO);
     printf("%s| This shell was designed to provide easier usage for new Unix family os users. |%s\n",MENU,NO);
     printf("%s+----------------------------------------+--------------------------------------|%s\n",MENU,NO);
-    printf("%s|MintSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
+    printf("%s|FlatSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
     printf("%s|Text shell mode help                   :| fls          List subdirs            |%s\n",MENU,NO);
     printf("%s| fcd            Change working directory| Escape       Escape the shell        |%s\n",MENU,NO);
     printf("%s| fmd            Make subdir             | Help         Show this menu          |%s\n",MENU,NO);
@@ -441,12 +441,11 @@ void Flatsh_menu_mode(void){
         for (int x = 1; x < lines-1; x++) {mvaddstr(x,0,brl);};
         for (int x = 1; x < lines-1; x++) {mvaddstr(x,cols-1,brl);};
         centrl = (cols/2) - 7;
-        mvprintw(0,centrl,"# Flatsh menu #");
+        mvprintw(0,centrl,"# MintSh menu #");
         mvprintw(3,5,"1 Shell  ");
         if (system("command -v nano >/dev/null 2>&1")==0){mvprintw(3,15,"2 GNUNano");};
         if (system("command -v links >/dev/null 2>&1")==0){mvprintw(3,25,"3 Links  ");};
         if (system("command -v tmux >/dev/null 2>&1")==0){mvprintw(3,35,"4 Tmux   ");}
-
         attroff(COLOR_PAIR(2));
         for(int i = 0; i < menumax; i++) {
             if(i == highlight) attron(COLOR_PAIR(2));
@@ -482,11 +481,8 @@ void Flatsh_menu_mode(void){
                 flatsh_clrs(nul);
                 initscr();
                 break;
-            case KEY_F(1):
-                highlight = 0;
-                break;
             case 'f':
-                highlight = 1;
+                highlight = 0;
                 break;
             case KEY_BACKSPACE:
                 highlight = 4;
