@@ -1,3 +1,3 @@
-# FlatShell
+# MintShell
 
 Shell with interesting ideas.
