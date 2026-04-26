@@ -224,7 +224,7 @@ void flatsh_help(char **args) {
     printf("%s| or OP programs, it could harm your system, or make it unstable,               |%s\n",MENU,NO);
     printf("%s| This shell was designed to provide easier usage for new Unix family os users. |%s\n",MENU,NO);
     printf("%s+----------------------------------------+--------------------------------------|%s\n",MENU,NO);
-    printf("%s|FlatSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
+    printf("%s|MintSh - Shell with unique ideas        | fpwd         Print current dir path  |%s\n",MENU,NO);
     printf("%s|Text shell mode help                   :| fls          List subdirs            |%s\n",MENU,NO);
     printf("%s| fcd            Change working directory| Escape       Escape the shell        |%s\n",MENU,NO);
     printf("%s| fmd            Make subdir             | Help         Show this menu          |%s\n",MENU,NO);
